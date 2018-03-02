@@ -61,10 +61,17 @@
                 ballSpeedY  *=  -1;
             }
             if(ballX    >   canvas.width){
-                ballReset();
+//                ballReset();
+                ballSpeedX *= -1;
             }
             if(ballX    <   0){
-                ballreset();
+                if(ballY > paddle1Y && ballY < paddle1Y+PADDLE_HEIGHT)
+                {
+                    ballSpeedX *= -1;
+                }
+                else{
+                    ballReset();
+                }
             }
         }
         //Reset the ball to the center
