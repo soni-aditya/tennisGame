@@ -7,13 +7,29 @@
         //Variables
         var canvas;
         var canvasContext;
-
+        const PADDLE_HEIGHT =   100;
             //position of ball
         var ballX   =   50;
         var ballY   =   50;
             //Velocity of ball
         var ballSpeedX  =   10;  //bigger the value, faster the ball will go
         var ballSpeedY  =   4;  //In computer grahics, +Y is downward and -Y is Upwards
+            //position of paddle
+        var paddle1Y    =   250;
+
+        //Find mouse position relative to canvas
+        function calculateMousePosition(evt) {
+            var rect    =   canvas.getBoundingClientRect();
+            var root    =   document.documentElement;
+            var mouseX  =   evt.clientX -   rect.left   -   root.scrollLeft;
+            var mouseY  =   evt.clientY -   rect.top    -   root.scrollTop;
+
+            return  {
+                x:mouseX,
+                y:mouseY
+            };
+        }
+
         //Execute code only when window is full loaded
         window.onload   =   function () {
             canvas  =   document.getElementById('gameCanvas');
@@ -27,6 +43,11 @@
                 drawEverything();
             },1000/framePerSecond);
 
+            canvas.addEventListener('mousemove',
+                function (evt) {
+                    var mousePos    =   calculateMousePosition(evt);
+                    paddle1Y    =   mousePos.y  -   (PADDLE_HEIGHT/2);
+                });
         };
         //moving the ball
         function moveEverything() {
@@ -51,7 +72,7 @@
             //canvas measurnments
             drawRect(0,0,canvas.width,canvas.height,'black');
             //drawing the rackets or paddles
-            drawRect(0,200,10,100,'white');
+            drawRect(0,paddle1Y,10,PADDLE_HEIGHT,'white');
             //drawing the ball
             drawCircle(ballX,ballY,10,'white');
         }
@@ -70,7 +91,7 @@
     </script>
 </head>
 <body>
-    <h2>Some text here</h2>
+    <!--<h2>Some text here</h2>-->
     <canvas id="gameCanvas" width="800" height="600"/>
 </body>
 </html>
