@@ -10,9 +10,10 @@
 
             //position of ball
         var ballX   =   50;
-
+        var ballY   =   50;
             //Velocity of ball
-        var ballSpeedX  =   15;  //bigger the value, faster the ball will go
+        var ballSpeedX  =   10;  //bigger the value, faster the ball will go
+        var ballSpeedY  =   4;  //In computer grahics, +Y is downward and -Y is Upwards
         //Execute code only when window is full loaded
         window.onload   =   function () {
             canvas  =   document.getElementById('gameCanvas');
@@ -31,7 +32,14 @@
         function moveEverything() {
             //Moving the ball
             ballX   =   ballX   +   ballSpeedX;
-            if(ballX    ==   canvas.width){
+            ballY   =   ballY   +   ballSpeedY;
+            if(ballY    >   canvas.height){
+                ballSpeedY  *=  -1;
+            }
+            if(ballY    <   0){
+                ballSpeedY  *=  -1;
+            }
+            if(ballX    >   canvas.width){
                 ballSpeedX  *=  -1;
             }
             if(ballX    <   0){
@@ -45,7 +53,7 @@
             //drawing the rackets or paddles
             drawRect(0,200,10,100,'white');
             //drawing the ball
-            drawCircle(ballX,150,10,'white');
+            drawCircle(ballX,ballY,10,'white');
         }
         //Drawing Circle
         function drawCircle(centerX,centerY,radius,drawColor,) {
