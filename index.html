@@ -10,6 +10,9 @@
 
             //position of ball
         var ballX   =   50;
+
+            //Velocity of ball
+        var ballSpeedX  =   15;  //bigger the value, faster the ball will go
         //Execute code only when window is full loaded
         window.onload   =   function () {
             canvas  =   document.getElementById('gameCanvas');
@@ -24,18 +27,30 @@
             },1000/framePerSecond);
 
         };
+        //moving the ball
         function moveEverything() {
             //Moving the ball
-            ballX   =   ballX   +   5;
+            ballX   =   ballX   +   ballSpeedX;
+            if(ballX    ==   canvas.width){
+                ballSpeedX  *=  -1;
+            }
+            if(ballX    <   0){
+                ballSpeedX  *=  -1;
+            }
         }
+        //Drawing
         function drawEverything() {
-//            console.log(ballX);
-            canvasContext.fillStyle =   "black";
-            canvasContext.fillRect(0,0,canvas.width,canvas.height);
-            canvasContext.fillStyle =   "red";
-            canvasContext.fillRect(ballX,100,10,10);
-            canvasContext.fillStyle =   "white";
-            canvasContext.fillRect(0,200,10,100);
+            //canvas measurnments
+            drawRect(0,0,canvas.width,canvas.height,'black');
+            //drawing the ball
+            drawRect(ballX,100,10,10,'red');
+            //drawing the rackets or paddles
+            drawRect(0,200,10,100,'white');
+        }
+        //Drawing rectangle
+        function drawRect(leftX,topY,width,height,drawColor) {
+            canvasContext.fillStyle =   drawColor;
+            canvasContext.fillRect(leftX,topY,width,height);
         }
     </script>
 </head>
