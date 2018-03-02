@@ -42,10 +42,17 @@
         function drawEverything() {
             //canvas measurnments
             drawRect(0,0,canvas.width,canvas.height,'black');
-            //drawing the ball
-            drawRect(ballX,100,10,10,'red');
             //drawing the rackets or paddles
             drawRect(0,200,10,100,'white');
+            //drawing the ball
+            drawCircle(ballX,150,10,'white');
+        }
+        //Drawing Circle
+        function drawCircle(centerX,centerY,radius,drawColor,) {
+            canvasContext.fillStyle =   drawColor;
+            canvasContext.beginPath();
+            canvasContext.arc(centerX,centerY,radius,0,Math.PI*2,true);   //context.arc(x,y,r,sAngle,eAngle,counterclockwise);
+            canvasContext.fill();
         }
         //Drawing rectangle
         function drawRect(leftX,topY,width,height,drawColor) {
