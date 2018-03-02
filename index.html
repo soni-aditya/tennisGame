@@ -8,12 +8,27 @@
         var canvas;
         var canvasContext;
 
+            //position of ball
+        var ballX   =   50;
         //Execute code only when window is full loaded
         window.onload   =   function () {
             canvas  =   document.getElementById('gameCanvas');
             canvasContext   =   canvas.getContext('2d');
+
+            //Applying basic animation, [time in milliseconds]
+            setInterval(drawEverything,50);
+        }
+        function drawEverything() {
+            console.log(ballX);
+            //Moving the ball
+            ballX   =   ballX   +   1;
+
             canvasContext.fillStyle =   "black";
             canvasContext.fillRect(0,0,canvas.width,canvas.height);
+            canvasContext.fillStyle =   "red";
+            canvasContext.fillRect(ballX,100,10,10);
+            canvasContext.fillStyle =   "white";
+            canvasContext.fillRect(canvas.width/2,200,50,25);
         }
     </script>
 </head>
