@@ -8,6 +8,7 @@
         var canvas;
         var canvasContext;
         const PADDLE_HEIGHT =   100;
+        const PADDLE_THICKNESS =   10;
             //position of ball
         var ballX   =   50;
         var ballY   =   50;
@@ -16,7 +17,7 @@
         var ballSpeedY  =   4;  //In computer grahics, +Y is downward and -Y is Upwards
             //position of paddle
         var paddle1Y    =   250;
-
+        var paddle2Y    =   250;
         //Find mouse position relative to canvas
         function calculateMousePosition(evt) {
             var rect    =   canvas.getBoundingClientRect();
@@ -61,8 +62,13 @@
                 ballSpeedY  *=  -1;
             }
             if(ballX    >   canvas.width){
-//                ballReset();
-                ballSpeedX *= -1;
+              if(ballY > paddle2Y && ballY < paddle2Y+PADDLE_HEIGHT)
+                {
+                    ballSpeedX *= -1;
+                }
+            else{
+                    ballReset();
+                }
             }
             if(ballX    <   0){
                 if(ballY > paddle1Y && ballY < paddle1Y+PADDLE_HEIGHT)
@@ -83,8 +89,10 @@
         function drawEverything() {
             //canvas measurnments
             drawRect(0,0,canvas.width,canvas.height,'black');
-            //drawing the rackets or paddles
-            drawRect(0,paddle1Y,10,PADDLE_HEIGHT,'white');
+            //drawing the left racket or paddle
+            drawRect(0,paddle1Y,PADDLE_THICKNESS,PADDLE_HEIGHT,'white');
+            //drawing the right computer racket or paddle
+            drawRect(canvas.width-10, paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
             //drawing the ball
             drawCircle(ballX,ballY,10,'white');
         }
