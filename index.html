@@ -18,6 +18,9 @@
             //position of paddle
         var paddle1Y    =   250;
         var paddle2Y    =   250;
+            //score variables
+        var player1Score    =   0;
+        var player2Score    =   0;
         //Find mouse position relative to canvas
         function calculateMousePosition(evt) {
             var rect    =   canvas.getBoundingClientRect();
@@ -73,15 +76,18 @@
             if(ballY    <   0){
                 ballSpeedY  *=  -1;
             }
+            //ballhitting rightmost side
             if(ballX    >   canvas.width){
               if(ballY > paddle2Y && ballY < paddle2Y+PADDLE_HEIGHT)
                 {
                     ballSpeedX *= -1;
                 }
-            else{
-                    ballReset();
-                }
+                else{
+                        ballReset();
+                        player1Score++;
+                    }
             }
+            //ballhitting leftmost side
             if(ballX    <   0){
                 if(ballY > paddle1Y && ballY < paddle1Y+PADDLE_HEIGHT)
                 {
@@ -89,6 +95,7 @@
                 }
                 else{
                     ballReset();
+                    player2Score++;
                 }
             }
         }
@@ -107,6 +114,10 @@
             drawRect(canvas.width-10, paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
             //drawing the ball
             drawCircle(ballX,ballY,10,'white');
+
+            //Display text
+            canvasContext.fillText(player1Score,100,100);
+            canvasContext.fillText(player2Score, canvas.width-100,100);
         }
         //Drawing Circle
         function drawCircle(centerX,centerY,radius,drawColor,) {
