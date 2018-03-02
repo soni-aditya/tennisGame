@@ -50,11 +50,23 @@
                     paddle1Y    =   mousePos.y  -   (PADDLE_HEIGHT/2);
                 });
         };
+        //creating an AI for the second player
+        function computerMovements() {
+            var paddle2YCenter  =   paddle2Y   +   (PADDLE_HEIGHT/2);
+            if(paddle2YCenter < ballY-35){
+                paddle2Y    += 6;
+            }
+            else if(paddle2YCenter < ballY+35){
+                paddle2Y    -= 6;
+            }
+        }
         //moving the ball
         function moveEverything() {
+            //calling our AI
+            computerMovements();
             //Moving the ball
-            ballX   =   ballX   +   ballSpeedX;
-            ballY   =   ballY   +   ballSpeedY;
+            ballX   +=   ballSpeedX;
+            ballY   +=   ballSpeedY;
             if(ballY    >   canvas.height){
                 ballSpeedY  *=  -1;
             }
