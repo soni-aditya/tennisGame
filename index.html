@@ -61,11 +61,16 @@
                 ballSpeedY  *=  -1;
             }
             if(ballX    >   canvas.width){
-                ballSpeedX  *=  -1;
+                ballReset();
             }
             if(ballX    <   0){
-                ballSpeedX  *=  -1;
+                ballreset();
             }
+        }
+        //Reset the ball to the center
+        function ballReset() {
+            ballX   =   canvas.width/2;
+            ballY   =   canvas.height/2;
         }
         //Drawing
         function drawEverything() {
